@@ -54,4 +54,15 @@ proc main() =
     window.destroy()
     sdl2.quit()
 
+  var
+    resPath = getResourcePath("Lesson2")
+    background: TexturePtr = loadTexture(resPath & DirSep & "background.bmp", renderer)
+    image: TexturePtr = loadTexture(resPath & DirSep & "image.bmp", renderer)
+
+  if background == nil or image == nil:
+    logSDLError("loadTexture")
+    renderer.destroy()
+    window.destroy()
+    sdl2.quit()
+
 when isMainModule: main()
