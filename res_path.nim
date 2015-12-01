@@ -1,7 +1,7 @@
 import sdl2
 import os
 
-proc getResourcePath*(subDir: string = ""): cstring =
+proc getResourcePath*(subDir: string = ""): string =
   var
     baseRes: string = getCurrentDir()
     suffixDir: string = ""
@@ -9,4 +9,4 @@ proc getResourcePath*(subDir: string = ""): cstring =
   if subDir != "":
     suffixDir = DirSep & subDir
 
-  return cstring(baseRes & DirSep & "assets" & suffixDir)
+  return baseRes & DirSep & "assets" & suffixDir
