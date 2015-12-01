@@ -65,4 +65,29 @@ proc main() =
     window.destroy()
     sdl2.quit()
 
+  renderer.clear()
+  var bW, bH, iW, iH: cint
+
+  # Background
+  background.queryTexture(nil, nil, addr(bW), addr(bH))
+  renderTexture(background, renderer, 0, 0)
+  renderTexture(background, renderer, bW, 0)
+  renderTexture(background, renderer, 0, bH)
+  renderTexture(background, renderer, bW, bH)
+
+  # Foreground
+  image.queryTexture(nil, nil, addr(iW), addr(iH))
+  var x: int = int(ScreenWidth / 2 - int(iW) / 2);
+  var y: int = int(ScreenHeight / 2 - int(iH) / 2);
+  renderTexture(image, renderer, x, y)
+  renderer.present()
+  delay(1000)
+
+  # Cleanup
+  background.destroy()
+  image.destroy()
+  renderer.destroy()
+  window.destroy()
+  sdl2.quit()
+
 when isMainModule: main()
