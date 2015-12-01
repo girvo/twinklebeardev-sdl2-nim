@@ -47,5 +47,11 @@ proc run() =
     ren.present()
     sdl2.delay(1000)
 
+  # Now cleanup and exit
+  tex.destroy()
+  ren.destroy()
+  win.destroy()
+  sdl2.quit()
+
 # Run our game
 when isMainModule: run()
