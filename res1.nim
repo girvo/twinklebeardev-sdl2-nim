@@ -19,7 +19,7 @@ proc run() =
     quitWithError("CreateWindow")
 
   # Create our renderer
-  var ren: RendererPtr = sdl2.createRenderer(win, -1, sdl2.RENDERER_ACCELERATED and sdl2.RENDERER_PRESENTVSYNC)
+  var ren: RendererPtr = sdl2.createRenderer(win, -1, Renderer_Accelerated or Renderer_PresentVsync)
   if ren == nil:
     quitWithError("CreateRenderer", true)
 
