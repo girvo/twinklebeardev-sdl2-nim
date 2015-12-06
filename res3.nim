@@ -27,3 +27,12 @@ proc renderTexture(tex: TexturePtr, ren: RendererPtr, x: int, y: int) =
     h: cint
   tex.queryTexture(nil, nil, addr(w), addr(h))
   renderTexture(tex, ren, x, y, w, h)
+
+proc init() =
+  if image.init(IMG_INIT_PNG) != IMG_INIT_PNG:
+    logSDLError("IMG_Init")
+
+proc main() =
+  init()
+
+when isMainModule: main()
