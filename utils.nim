@@ -1,5 +1,6 @@
 import os
 import sdl2
+import macros
 
 ###
 # Logs out SDL2 errors
@@ -19,3 +20,10 @@ proc getResourcePath*(subDir: string = ""): string =
 
   return baseRes & DirSep & "assets" & suffixDir
 
+###
+# Cleanup macro for all SDL types
+##
+macro cleanup*(n: varargs[expr]): stmt =
+  result = newNimNode(nnkStmtList, n)
+  for i in 0..n.len-1:
+    add(result, newCall("destroy", n[i]))

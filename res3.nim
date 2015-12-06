@@ -33,6 +33,33 @@ proc init() =
     logSDLError("IMG_Init")
 
 proc main() =
+  if int(sdl2.init(sdl2.Init_Everything)) != 0:
+    logSDLError("SDL_Init")
+
+  # Initialise the image subsystem first
   init()
+
+  var window: WindowPtr = sdl2.createWindow("Lesson 2", 100, 100, cint(ScreenWidth), cint(ScreenHeight), sdl2.SDL_Window_Shown)
+  if window == nil:
+    logSDLError("CreateWindow")
+
+  var renderer: RendererPtr = sdl2.createRenderer(window, -1, Renderer_Accelerated or Renderer_PresentVsync)
+  if renderer == nil:
+    logSDLError("CreateRenderer", false)
+    window.destroy()
+    sdl2.quit()
+
+  # Now lets do the rest of what we wanna do
+  var
+    filepath = getResourcePath("Lesson3")
+    background = loadTexture(filepath & "background.png", renderer)
+    image = loadTexture(filepath & "image.png", renderer)
+  if background == nil or image == nil:
+    cleanup(background, image, renderer, window)
+    sdl2.quit()
+
+
+
+
 
 when isMainModule: main()
