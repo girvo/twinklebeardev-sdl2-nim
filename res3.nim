@@ -7,17 +7,23 @@ const
   ScreenHeight: int = 480
   TileSize: int = 40
 
-proc loadTexture(file: string, renderer: RendererPtr): TexturePtr =
-  var texture: TexturePtr = loadTexture(renderer, file)
+proc loadTexture(file: string, ren: RendererPtr): TexturePtr =
+  var texture: TexturePtr = loadTexture(ren, file)
   if texture == nil:
     logSDLError("LoadTexture")
   return texture
 
-proc renderTexture(tex: TexturePtr, renderer: RendererPtr, x: int, y: int, w: int, h: int) =
-  var
-    dst: Rect
+proc renderTexture(tex: TexturePtr, ren: RendererPtr, x: int, y: int, w: int, h: int) =
+  var dst: Rect
   dst.x = cint(x)
   dst.y = cint(y)
   dst.w = cint(w)
   dst.h = cint(h)
-  renderer.copy(tex, nil, addr(dst))
+  ren.copy(tex, nil, addr(dst))
+
+proc renderTexture(tex: TexturePtr, ren: RendererPtr, x: int, y: int) =
+  var
+    w: cint
+    h: cint
+  tex.queryTexture(nil, nil, addr(w), addr(h))
+  renderTexture(tex, ren, x, y, w, h)
