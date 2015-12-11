@@ -1,8 +1,8 @@
 NIMOPTS=-d:debug
 
-all: res3
+all: res4
 
-run: res3
+run: res4
 	@./$<
 
 res1: res1.nim
@@ -13,5 +13,8 @@ res2: res2.nim
 
 res3: res3.nim
 	nim c $(NIMOPTS) res3.nim
+
+res4: res4.nim
+	nim c $(NIMOPTS) res4.nim
 
 .PHONY: all run

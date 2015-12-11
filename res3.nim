@@ -30,7 +30,7 @@ proc main() =
   if int(sdl2.init(sdl2.Init_Everything)) != 0:
     logSDLError("SDL_Init")
 
-  var window: WindowPtr = sdl2.createWindow("Lesson 2", 100, 100, cint(ScreenWidth), cint(ScreenHeight), sdl2.SDL_Window_Shown)
+  var window: WindowPtr = sdl2.createWindow("Lesson 3", 100, 100, cint(ScreenWidth), cint(ScreenHeight), sdl2.SDL_Window_Shown)
   if window == nil:
     logSDLError("CreateWindow")
 
